@@ -2,7 +2,7 @@ import pygame
 import numpy as np
 import colorsys
 
-
+#
 def calculate(x):
     """
     Receive complex number x, return number of iterations
