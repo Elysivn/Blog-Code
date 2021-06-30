@@ -18,7 +18,8 @@ def calculate(x):
 
 def plot(re_start, re_end, im_start, im_end):
     """
-    Plot the colour for each pixel based on iterations
+    Plot the colour for each pixel based on iterations in the calculate
+    function.
     """
     pixel_x = np.linspace(re_start, re_end, w) # range of x vals
     pixel_y = np.linspace(im_start, im_end, h) # range of y vals
@@ -45,20 +46,24 @@ def plot(re_start, re_end, im_start, im_end):
             screen.set_at((i, j), (r, g, b))
 
 
-def zoom(rect_start, rect_end):
+def zoom(r_s, r_e):
     """
     Receive coordinates drawn on screen, zoom in on those coordinates
-    as a rectangle.
+    as a rectangle. Matches the co-ordinates on screen to the corresponding
+    complex number inside the complex matrix. Decomposes these 2 complex numbers
+    into real and imaginary parts and passes the 4 components into the plot
+    function.
+
+    Argument descriptions:
+
+    r_s: upper left corner of rectangle i.e. 'rectangle_start'
+    r_e: bottom left corner of rectangle i.e. 'rectangle_end'
     """
-    x1 = rect_start[0]
-    y1 = rect_start[1]
-    x2 = rect_end[0]
-    y2 = rect_end[1]
-    re_start = complex_matrix[x1][y1].real
-    im_start = complex_matrix[x1][y1].imag
-    re_end = complex_matrix[x2][y2].real
-    im_end = complex_matrix[x2][y2].imag
-    return plot(re_start, re_end, im_start, im_end)
+    return plot(complex_matrix[r_s[0]][r_s[1]].real,
+                complex_matrix[r_s[0]][r_s[1]].imag,
+                complex_matrix[r_e[0]][r_e[1]].real,
+                complex_matrix[r_e[0]][r_e[1]].imag
+                )
 
 
 # Setting up initial stuff
